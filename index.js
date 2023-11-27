@@ -40,7 +40,7 @@ inquirer
       {
         type: 'input',
         name: 'test',
-        message: "Please provide a walkthrough of required tests if acclicable"
+        message: "Please provide a walkthrough of required tests if applicable"
       },
       {
         type: 'input',
