@@ -20,7 +20,6 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 
 // TODO: Create an array of questions for user input
-const questions = [];
 inquirer
   .prompt([
     {
@@ -49,9 +48,10 @@ inquirer
         message: "Who are the contributors of your project (GitHub usernames)?"
       },
       {
-        type: 'input',
+        type: 'list',
         name: 'license',
-        message: "What license did you use?"
+        message: "What license did you use?",
+        choices: ["MIT", "Apache 2.0", "GPL 3.0", "BSD 3", "None"]
       },
       {
         type: 'input',
@@ -72,19 +72,34 @@ inquirer
   .then((answers) => {
     //user feed back
     console.log(answers);
+    const readmeContent = generateMarkdown(answers)
+    fs.writeFile("readme.md", readmeContent, function(err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Successfully created README");
+      }
+    });
    })
-  .catch((error) => {
-    if (error.isTtyError) {
-        //error prompt
-    } else {
-        //something else went wrong
-    }
-   });
+  // .catch((error) => {
+  //   if (error.isTtyError) {
+  //       //error prompt
+  //   } else {
+  //       //something else went wrong
+  //   }
+  //  });
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    
-}
+// function writeToFile(fileName, readmeContent) {
+//   fs.writeFile(fileName, readmeContent, function(err) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Successfully created README");
+//     }
+//   });
+
+// }
 
 // // TODO: Create a function to initialize app
 // function init() {
